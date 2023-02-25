@@ -33,7 +33,4 @@ async def play_audio(client, message):
 
     await voice_client.play(discord.FFmpegPCMAudio(executable=os.getenv('FFMPEG'), source="Audio/NeverGonnaGiveYouUp.mp3"))
 
-    while (voice_client.is_playing):
-        sleep(.1)
-
     
