@@ -1,10 +1,10 @@
 import vlc
 import yt_dlp
 
-url = 'https://www.youtube.com/watch?v=hgfJoV5Lmbw'
+url = 'https://www.youtube.com/watch?v=WKu1JgtFohA'
 ydl_opts = {
     'format': 'bestaudio/best',
-    'outtmpl': './Audio/1.%(ext)s', #%(title)s
+    'outtmpl': './Audio/%(title)s.%(ext)s', #%(title)s
     'postprocessors': [{
         'key': 'FFmpegExtractAudio',
         'preferredcodec': 'mp3',
