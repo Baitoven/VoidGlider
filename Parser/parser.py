@@ -1,9 +1,10 @@
 import discord
-from discord.ext import commands
 import os
-import nacl
+from Audio.youtube import *
+import time
 
 voice_client = discord.voice_client
+audioCachePath = 'Audio/AudioCache'
 
 async def parse(client, message):
     if message.content.startswith('/hello'):
@@ -31,6 +32,13 @@ async def play_audio(client, message):
         channel = message.author.voice.channel
         voice_client = await channel.connect()
 
-    await voice_client.play(discord.FFmpegPCMAudio(executable=os.getenv('FFMPEG'), source="Audio/NeverGonnaGiveYouUp.mp3"))
+    #url = message.content.split(' ')[1]
+    #await load_from_url(url)
+    #track = audioCachePath + parse_url(url) + '.mp3'
+
+    #time.sleep(5)
+
+    source = discord.FFmpegPCMAudio('oRSijEW_cDM.mp3')#, executable=os.getenv('FFMPEG'))
+    voice_client.play(source)
 
     
