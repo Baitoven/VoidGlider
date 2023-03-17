@@ -41,9 +41,17 @@ def add_commands(bot):
         if (context.voice_client):
             source = discord.FFmpegPCMAudio(source=audioCachePath + track["content"] + '.mp3', executable=os.getenv('FFMPEG'))
             voice = context.bot.voice_clients[0]
-            voice.play(source=source, after=lambda: Play(context))
+            voice.play(source=source, after=lambda error: PlayNext(context))
         else:
            await context.send("You must be in a voice channel first so I can join it.")
+
+    def PlayNext(context):
+        track = sgQueue.Take()
+
+        if (context.voice_client):
+            source = discord.FFmpegPCMAudio(source=audioCachePath + track["content"] + '.mp3', executable=os.getenv('FFMPEG'))
+            voice = context.bot.voice_clients[0]
+            voice.play(source=source, after=lambda error: PlayNext(context))
 
     @bot.command(name='queue', pass_context=True)
     async def Queue(context, message):
