@@ -3,7 +3,6 @@ import vlc
 import yt_dlp
 import os
 import asyncio
-import time
 
 mediaPlayer = vlc.MediaPlayer()
 

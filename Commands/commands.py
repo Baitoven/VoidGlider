@@ -40,20 +40,4 @@ def add_commands(bot):
             voice.play(source, after=None)
         else:
            await context.send("You must be in a voice channel first so I can join it.") 
-'''
-
-async def play_audio(client, message):
-    channel = message.author.voice.channel
-    voice_client = await channel.connect()
-
-    #url = message.content.split(' ')[1]
-    #await load_from_url(url)
-    #track = audioCachePath + parse_url(url) + '.mp3'
-
-    #time.sleep(5)
-
-    source = discord.FFmpegPCMAudio(source='oRSijEW_cDM.mp3', executable=os.getenv('FFMPEG'))
-    time.sleep(1)
-    voice_client.play(source, after=None) #try switching to external commands
-'''
     
