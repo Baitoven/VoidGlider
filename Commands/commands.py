@@ -1,11 +1,15 @@
+import time
 from discord.ext import commands
 import discord
 import os
+from Audio.audioQueue import SongQueue, add_song_from_url
 from Audio.youtube import load_from_url, parse_url
 
 audioCachePath = 'Audio/AudioCache/'
 
 def add_commands(bot):
+
+    sgQueue = SongQueue()
 
     @bot.command(name='hello')
     async def Hello(context):
@@ -26,18 +30,24 @@ def add_commands(bot):
         else: # But if it isn't
             await context.send("I'm not in a voice channel, use the join command to make me join")
 
-    @bot.command(name='play', pass_context=True)
-    async def Play(context, message):
-        channel = context.author.voice.channel
-        voice = await channel.connect()
-    
-        url = message.split(' ')[0]
-        await load_from_url(url)
-        track = audioCachePath + parse_url(url) + '.mp3'
+    @bot.command(name='play')
+    async def Play(context):
+        if (sgQueue.IsEmpty()):
+            await context.send("Song queue is empty. Try queuing a new song with /queue first")
+            return
+
+        track = sgQueue.Take()
 
         if (context.voice_client):
-            source = discord.FFmpegPCMAudio(source=track, executable=os.getenv('FFMPEG'))
-            voice.play(source, after=None)
+            source = discord.FFmpegPCMAudio(source=audioCachePath + track["content"] + '.mp3', executable=os.getenv('FFMPEG'))
+            voice = context.bot.voice_clients[0]
+            voice.play(source=source, after=lambda: Play(context))
         else:
-           await context.send("You must be in a voice channel first so I can join it.") 
+           await context.send("You must be in a voice channel first so I can join it.")
+
+    @bot.command(name='queue', pass_context=True)
+    async def Queue(context, message):
+        url = message.split(' ')[0]
+        await add_song_from_url(sgQueue, url)
+        await context.send("VoidGlider just finished queuing song " + url)
     

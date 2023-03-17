@@ -10,6 +10,9 @@ def parse_url(url):
     return url.split('=')[1]
 
 async def load_from_url(url):
+    if (os.path.exists('./Audio/AudioCache/' + parse_url(url) + '.mp3')):
+        return
+    
     isDownloadedEvent = asyncio.Event()
 
     def progress_hook(event):
