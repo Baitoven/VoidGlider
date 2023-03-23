@@ -46,6 +46,9 @@ def add_commands(bot):
            await context.send("You must be in a voice channel first so I can join it.")
 
     def PlayNext(context):
+        if (sgQueue.IsEmpty()):
+            return
+
         track = sgQueue.Take()
 
         if (context.voice_client):
@@ -58,4 +61,11 @@ def add_commands(bot):
         url = message.split(' ')[0]
         await add_song_from_url(sgQueue, url)
         await context.send("VoidGlider just finished queuing song " + url)
+
+    @bot.command(name='skip')
+    async def Next(context):
+        if (sgQueue.IsEmpty()):
+            await context.send("Song queue is empty. Try queuing a new song with /queue first")
+            return
+        PlayNext(context)
     
