@@ -1,10 +1,7 @@
 import logging
-import vlc
 import yt_dlp
 import os
 import asyncio
-
-mediaPlayer = vlc.MediaPlayer()
 
 def parse_url(url):
     return url.split('=')[1]
