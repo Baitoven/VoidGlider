@@ -1,0 +1,27 @@
+{
+  "dependencies": {
+    "discord.js": "^14.11.0",
+    "dotenv": "^16.3.1"
+  },
+  "name": "voidglider",
+  "description": "* Setup your .env with a correct `DISCORD_TOKEN` and a valid `FFMPEG` .exe location\r * Probably need to run \r ```shell\r python -m pip install -U discord.py\r python -m pip install yt_dlp asyncio dotenv\r ```\r * Run & enjoy\r ```shell\r python VoidGlider.py\r ```",
+  "version": "0.0.0",
+  "main": "VoidGlider.mjs",
+  "devDependencies": {
+    "eslint": "^8.43.0"
+  },
+  "scripts": {
+    "test": "node --experimental-json-modules Voidglider.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Baitoven/VoidGlider.git"
+  },
+  "author": "Adrien Cochard",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Baitoven/VoidGlider/issues"
+  },
+  "homepage": "https://github.com/Baitoven/VoidGlider#readme",
+  "type" : "module"
+}

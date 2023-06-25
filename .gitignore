@@ -264,6 +264,4 @@ dist
 
 # Audio cache
 Audio/AudioCache
-
-#Visual Studio stuff
-.vscode
+.cache
